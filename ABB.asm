@@ -17,8 +17,7 @@ main:
 	li $s2, 1		#Utilizado apenas para operações matemáticas
 	li $t0, 0		#Inicializa $t0 como zero - contador de elementos do array
 	li $t1, 0		#Inicializa $t1 como zero - utilizado para declarar o valor dos elementos
-	li $t2, 0		#Inicializa $t2 como zero - contador pra fazer 2t+1 e 2t+2
-	li $t3, 0		#Inicializa $t3 como zero - para fazer $t3 = 2*$t2
+	li $t3, 0		#Inicializa $t3 como zero - para fazer $t3 = 2*t + 1 e 2*t + 2
 	li $t4, 0		#Inicializa $t4 como zero - para receber o valor do nó pai do nó a ser implementado
 	move $sp, $s1
 	sw $t1, ($s1)		#salva o valor de #t1 no endereço de $s1
@@ -55,10 +54,10 @@ insercao:
 	b insercao
 	
 esquerda:
-	mul $t3, $t2, 2			#$t3 = 2 * $t2
+	mul $t3, $t3, 2			#$t3 = 2 * $t2
 	addi $t3, $t3, 1		#$t3 = 2 * $t2 + 1
 	mul $s2, $t3, 4			#$s2 = (2n+1) * 4 (pula n inteiros)
-	addi $t2, $t2, 1		#incrementa o contador
+#	addi $t2, $t2, 1		#incrementa o contador
 	move $sp, $s1			#retorna para o no raiz
 	add $sp, $sp, $s2		#$sp pula para o filho da esquerda
 	lw $t4, ($sp)			#recebe o valor do nó atual
@@ -70,10 +69,10 @@ esquerda:
 	#####
 
 direita:
-	mul $t3, $t2, 2			#$t3 = 2 * $t2
+	mul $t3, $t3, 2			#$t3 = 2 * $t2
 	addi $t3, $t3, 2		#$t3 = 2 * $t2 + 2
 	mul $s2, $t3, 4			#$s2 = (2n+2) * 4 (pula n int)
-	addi $t2, $t2, 2		#incrementa o contador
+#	addi $t2, $t2, 2		#incrementa o contador
 	move $sp, $s1			#retorna para o no raiz
 	add $sp, $sp, $s2		#pula para a poscao do vetor que recebera o novo valor
 	lw $t4, ($sp)			#recebe o valor do nó atual
@@ -88,7 +87,7 @@ armazena:
 	move $sp, $s1			#retorna para o no raiz
 	add $sp, $sp, $s2		#pula para a poscao do vetor que recebera o novo valor
 	sw $t1, ($sp)			#salva o valor de $t1 no endereço de $s1
-	li $t2, 0			#zera o contador
+	li $t3, 0			#zera o contador
 	j initlp
 
 
